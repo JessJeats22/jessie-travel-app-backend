@@ -28,6 +28,8 @@ router.post('/sign-in', async (req, res) => {
      console.log('plain text' , password)
     console.log('hash', userToLogin.password)
 
+    if (!userToLogin) throw new Error('Unauthorised')
+
      if (!bcrypt.compareSync(password, userToLogin.password)) {
       // Send an error
       throw new Error('Unauthorised') }
