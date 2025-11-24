@@ -3,8 +3,10 @@ import morgan from 'morgan'
 import mongoose from 'mongoose'
 import 'dotenv/config'
 
+
 // * Middleware
 import cors from 'cors'
+import isSignedIn from './middleware/isSignedIn.js'
 
 // * Routers
 import authRouter from './controllers/auth.js'
@@ -19,6 +21,12 @@ app.use(express.json())
 
 // * Routes
 app.use('/auth', authRouter)
+
+// Access should only be granted to this route if the client has provided a valid authentication token
+app.get('/secure-route', isSignedIn, (req, res) => {
+  console.log('REQ.USER FROM ROUTE HANDLER', req.user)
+  return res.json({ message: 'You have accessed the secure route' })
+})
 
 // * Connections
 const connect = async () => {
