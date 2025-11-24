@@ -5,6 +5,8 @@ import morgan from 'morgan'
 import cors from 'cors'
 
 // * Routers
+import authRouter from './controllers/auth.js'
+
 
 const app = express()
 
@@ -12,6 +14,9 @@ const app = express()
 app.use(cors())
 app.use(morgan('dev'))
 app.use(express.json())
+
+// * Routes
+app.use('/auth', authRouter)
 
 // * Connections
 // Start Node Server
