@@ -10,6 +10,7 @@ import isSignedIn from './middleware/isSignedIn.js'
 
 // * Routers
 import authRouter from './controllers/auth.js'
+import countryRouter from './controllers/country.js'
 
 
 const app = express()
@@ -21,6 +22,7 @@ app.use(express.json())
 
 // * Routes
 app.use('/auth', authRouter)
+app.use('/country', countryRouter)
 
 // Access should only be granted to this route if the client has provided a valid authentication token
 app.get('/secure-route', isSignedIn, (req, res) => {
