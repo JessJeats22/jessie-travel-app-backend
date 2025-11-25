@@ -1,5 +1,5 @@
 export class NotFound extends Error {
-  constructor(message){
+  constructor(message) {
     super(message)
     this.name = 'NotFound'
     this.status = 404
@@ -8,7 +8,7 @@ export class NotFound extends Error {
 
 
 export class Forbidden extends Error {
-  constructor(message){
+  constructor(message) {
     super(message)
     this.name = 'Forbidden'
     this.status = 403
@@ -16,7 +16,7 @@ export class Forbidden extends Error {
 }
 
 export class Unauthorised extends Error {
-  constructor(message){
+  constructor(message) {
     super(message)
     this.name = 'Unauthorised'
     this.status = 401

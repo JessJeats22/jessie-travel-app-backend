@@ -33,9 +33,9 @@ const errorHandler = (error, req, res, next) => {
 
   // CastError
   if (error.name === 'CastError' && error.kind === 'ObjectId') {
-    return res.status(404).json({ message: 'Not found.'})
+    return res.status(404).json({ message: 'Not found.' })
   }
-  
+
   // ValidationError
   if (error.name === 'ValidationError') {
     // Get the error objects as an array (rather than keys on an object)

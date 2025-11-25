@@ -29,12 +29,6 @@ app.use('/travelPost', travelPostRouter)
 // * Error handling middleware
 app.use(errorHandler)
 
-// Access should only be granted to this route if the client has provided a valid authentication token
-app.get('/secure-route', isSignedIn, (req, res) => {
-  console.log('REQ.USER FROM ROUTE HANDLER', req.user)
-  return res.json({ message: 'You have accessed the secure route' })
-})
-
 // * Connections
 const connect = async () => {
   try {
@@ -47,6 +41,4 @@ const connect = async () => {
 connect()
 
 
-
-// Start Node Server
 app.listen(3000, () => console.log('🚀 Server up and running on port 3000'))

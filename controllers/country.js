@@ -15,7 +15,7 @@ router.get('', async (req, res, next) => {
     try {
         const countries = await Country.find()
         res.status(200).json(countries)
-        console.log("COUNTRIES SUBMITTED")
+
     } catch (error) {
         next(error)
     }
@@ -24,23 +24,22 @@ router.get('', async (req, res, next) => {
 
 // * SHOW 
 router.get('/:countryId', async (req, res, next) => {
-try {
-    const {countryId} = req.params
-    const country = await Country.findById(countryId)
+    try {
+        const { countryId } = req.params
+        const country = await Country.findById(countryId)
 
-    if(!country) throw new NotFound('Country not found')
+        if (!country) throw new NotFound('Country not found')
 
-    const relatedPosts = await TravelPost.find({ country: country._id })
+        const relatedPosts = await TravelPost.find({ country: country._id })
+        res.status(200).json({
+            country: country,
+            relatedPosts: relatedPosts
+        })
 
-    res.status(200).json({
-        country: country,
-        relatedPosts: relatedPosts
-    })
-    console.log("COUNTRY HAS BEEN LOCATED")
-} catch (error) {
-    next(error)
-    
-}
+    } catch (error) {
+        next(error)
+
+    }
 }
 )
 export default router

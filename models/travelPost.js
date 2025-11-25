@@ -3,30 +3,30 @@ import mongoose from 'mongoose'
 const travelPostSchema = new mongoose.Schema({
 
   // ERD relationships
-  author: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User', 
-    required: true 
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   },
 
-  country: { 
-    type: mongoose.Schema.Types.ObjectId, 
+  country: {
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Country',
-    required: true 
+    required: true
   },
 
-  // Key content fields
-  location: { 
-    type: String, 
-    required: true 
+
+  location: {
+    type: String,
+    required: true
   },
 
-  whatTheyDid: { 
-    type: String 
+  whatTheyDid: {
+    type: String
   },
 
-  recommendations: { 
-    type: String 
+  recommendations: {
+    type: String
   },
 
   // images stored as array of objects (ideal for URLs + captions)
