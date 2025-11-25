@@ -10,7 +10,6 @@ const countrySchema = new mongoose.Schema({
   description: { type: String },
   capitalCity: { type: String },
   continent: { type: String },
-  region: { type: String },
   languages: [{ type: String }],
   currency: { type: String },
 
