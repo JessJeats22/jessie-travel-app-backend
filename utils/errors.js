@@ -14,3 +14,11 @@ export class Forbidden extends Error {
     this.status = 403
   }
 }
+
+export class Unauthorised extends Error {
+  constructor(message){
+    super(message)
+    this.name = 'Unauthorised'
+    this.status = 401
+  }
+}
