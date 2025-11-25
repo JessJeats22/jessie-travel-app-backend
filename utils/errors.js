@@ -5,3 +5,12 @@ export class NotFound extends Error {
     this.status = 404
   }
 }
+
+
+export class Forbidden extends Error {
+  constructor(message){
+    super(message)
+    this.name = 'Forbidden'
+    this.status = 403
+  }
+}
