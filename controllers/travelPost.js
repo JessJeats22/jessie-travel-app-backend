@@ -11,7 +11,7 @@ const router = express.Router()
 // * CREATE
  router.post('', isSignedIn, async (req, res, next) => {
     res.json({ message: "HIT TRAVELPOST POST ROUTE"})
-    console.log("HIT TRRAVELPOST POST ROUTE")
+    console.log("HIT TRAVELPOST POST ROUTE")
  }
 )
 
