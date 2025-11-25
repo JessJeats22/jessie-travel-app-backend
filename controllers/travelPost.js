@@ -55,27 +55,53 @@ router.get('/:travelPostId', isSignedIn, async (req, res, next) => {
 router.put('/:travelPostId', isSignedIn, async (req, res, next) => {
    try {
 
-      const {travelPostId} = req.params
+      const { travelPostId } = req.params
 
       const travelPost = await TravelPost.findById(travelPostId)
-      if(!travelPost) throw new NotFound('Travel Post not found')
-      
-         if(!travelPost.author.equals(req.user._id)) {
-            throw new Forbidden ('You do not have permission to access this resource.')
-         }
+      if (!travelPost) throw new NotFound('Travel Post not found')
 
-         const updatedTravelPost = await TravelPost.findByIdAndUpdate(travelPostId, req.body, {returnDocument: 'after'})
+      if (!travelPost.author.equals(req.user._id)) {
+         throw new Forbidden('You do not have permission to access this resource.')
+      }
 
-      res.json (updatedTravelPost)
+      const updatedTravelPost = await TravelPost.findByIdAndUpdate(travelPostId, req.body, { returnDocument: 'after' })
+
+      res.json(updatedTravelPost)
       console.log(updatedTravelPost)
-      
+
    } catch (error) {
-         next(error)
+      next(error)
    }
 })
 
 
+// * DELETE
 
+router.delete('/:travelPostId', isSignedIn, async (req, res, next) => {
+   try {
+
+      const { travelPostId } = req.params
+      const deletePost = await TravelPost.findById(travelPostId)
+      if (!deletePost) throw new NotFound('Post not found.')
+
+
+      if (!deletePost.author.equals(req.user._id)) {
+         throw new Forbidden('You do not have permission to access this resource.')
+      }
+
+
+
+      await TravelPost.findByIdAndDelete(travelPostId)
+
+      res.sendStatus(204)
+      console.log("POST DELETED")
+
+   } catch (error) {
+      next(error)
+   }
+
+
+})
 
 
 
