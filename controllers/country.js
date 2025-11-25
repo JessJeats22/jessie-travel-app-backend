@@ -3,6 +3,7 @@ import Country from '../models/country.js'
 import { NotFound } from '../utils/errors.js'
 
 
+
 const router = express.Router()
 
 // * Routes
@@ -24,7 +25,7 @@ router.get('', async (req, res, next) => {
 router.get('/:countryId', async (req, res, next) => {
 try {
     const {countryId} = req.params
-    const country = await Country.findById(countryId)
+    const country = await Country.findById(countryId).populate("TravelPost")
 
     if(!country) throw new NotFound('Country not found')
     res.status(200).json(country)
