@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const travelEntrySchema = new mongoose.Schema({
+const travelPostSchema = new mongoose.Schema({
 
   // ERD relationships
   author: { 
@@ -37,6 +37,6 @@ const travelEntrySchema = new mongoose.Schema({
 
 }, { timestamps: true })
 
-const TravelEntry = mongoose.model('TravelEntry', travelEntrySchema)
+const TravelPost = mongoose.model('TravelPost', travelPostSchema)
 
-export default TravelEntry
+export default TravelPost
