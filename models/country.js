@@ -17,7 +17,6 @@ const countrySchema = new mongoose.Schema({
   imageUrl: { type: String },
 
   // ERD
-  // travelPosts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'TravelPost' }],
 
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 }, { timestamps: true })
