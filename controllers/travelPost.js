@@ -10,12 +10,24 @@ const router = express.Router()
 
 // * CREATE
  router.post('', isSignedIn, async (req, res, next) => {
-    res.json({ message: "HIT TRAVELPOST POST ROUTE"})
-    console.log("HIT TRAVELPOST POST ROUTE")
+   try {
+       // assures the logged in user is recorded as the author of the travelPost
+      req.body.author = req.user._id
+
+      // create new TP in MongoDB passing in boyd of form 
+      const newTravelPost = await TravelPost.create(req.body)
+
+      // Return the new TP to the client
+      res.status(201).json(newTravelPost)
+
+      console.log("HIT TRAVELPOST POST ROUTE")
+      
+   } catch (error) {
+      next(error)
+   }
+  
  }
 )
-
-
 
 // * SHOW 
 

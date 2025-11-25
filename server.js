@@ -7,6 +7,7 @@ import 'dotenv/config'
 // * Middleware
 import cors from 'cors'
 import isSignedIn from './middleware/isSignedIn.js'
+// import errorHandler from './middleware/errorHandler.js'
 
 // * Routers
 import authRouter from './controllers/auth.js'
@@ -24,6 +25,10 @@ app.use(express.json())
 app.use('/auth', authRouter)
 app.use('/country', countryRouter)
 app.use('/travelPost', travelPostRouter)
+
+// // * Error handling middleware
+// // Always defined with 4 arguments
+// app.use(errorHandler)
 
 // Access should only be granted to this route if the client has provided a valid authentication token
 app.get('/secure-route', isSignedIn, (req, res) => {
