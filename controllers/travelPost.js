@@ -23,6 +23,18 @@ router.post('', isSignedIn, async (req, res, next) => {
 }
 )
 
+// * NEW SHOW ALL
+
+router.get('', async (req, res, next) => {
+  try {
+    const posts = await TravelPost.find().populate("author").populate("country")
+    res.status(200).json(posts)
+  } catch (error) {
+    next(error)
+  }
+})
+
+
 // * SHOW 
 router.get('/:travelPostId', isSignedIn, async (req, res, next) => {
 

@@ -32,7 +32,7 @@ const travelPostSchema = new mongoose.Schema({
   // images stored as array of objects (ideal for URLs + captions)
   images: [{
     url: { type: String, required: true },
-    caption: { type: String }
+    // caption: { type: String }
   }]
 
 }, { timestamps: true })
