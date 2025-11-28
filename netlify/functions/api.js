@@ -1,0 +1,53 @@
+import express from 'express'
+import morgan from 'morgan'
+import mongoose from 'mongoose'
+import 'dotenv/config'
+import serverless from 'serverless-http'
+
+
+// * Middleware
+import cors from 'cors'
+import errorHandler from '../../middleware/errorHandler.js'
+
+// * Routers
+import authRouter from '../../controllers/auth.js'
+import countryRouter from '../../controllers/country.js'
+import travelPostRouter from '../../controllers/travelPost.js'
+
+const app = express()
+
+// * Middleware 
+app.use(cors())
+app.use(morgan('dev'))
+
+
+// * Routes
+app.use('/auth', authRouter)
+app.use('/country', countryRouter)
+app.use('/travelPost', travelPostRouter)
+
+// * Error handling middleware
+app.use(errorHandler)
+
+// * Connections
+const connect = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI)
+    console.log('🔒 Database connection established')
+  } catch (error) {
+    console.log(error)
+  }
+}
+connect()
+
+export const handler = serverless(app, {
+  request: (req, event) => {
+    if (typeof event.body === 'string') {
+      try {
+        req.body = JSON.parse(event.body);
+      } catch (err) {
+        req.body = {};
+      }
+    }
+  }
+});
